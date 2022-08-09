@@ -1,3 +1,8 @@
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
 
@@ -17,3 +22,4 @@ app.use(express.static('website'));
 
 
 // Setup Server
+app.listen(3000,()=>console.log('express started...'));
