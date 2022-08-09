@@ -21,6 +21,22 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static('website'));
 
+//GET route to return prjectData.
+app.get('/data',(req,res)=>{
+    res.json(projectData);
+});
+
+//POST route to store data in projectData.
+app.post('/data',(req,res)=>{
+    console.log(req.body);
+    console.log(`old project data: `);
+    console.log(projectData);
+    projectData["temp"] = req.body.temp;
+    projectData["date"] = req.body.date;
+    projectData["response"] = req.body.resp;
+    console.log(`new project data: `);
+    console.log(projectData);
+});
 
 // Setup Server
 app.listen(3000,()=>console.log('express started...'));
