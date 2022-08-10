@@ -1,7 +1,7 @@
 /* Global Variables */
 //API request example => https://api.openweathermap.org/data/2.5/weather?zip=94040&appid=ac5815b64e47eca93a9671631b3f0150
 const API_URL = "https://api.openweathermap.org/data/2.5/weather?";
-const API_KEY = "ac5815b64e47eca93a9671631b3f0150";
+const API_KEY = "ac5815b64e47eca93a9671631b3f0150&units=imperial";
 let btn = document.getElementById('generate');
 let userFeeling = document.getElementById('feelings');
 let tempDiv = document.getElementById('temp');
@@ -12,7 +12,7 @@ let zipCode = document.getElementById('zip');
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = (d.getMonth()+1)+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 
 // Event listener to add function to existing HTML DOM element
