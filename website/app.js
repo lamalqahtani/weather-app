@@ -3,6 +3,8 @@
 const API_URL = "https://api.openweathermap.org/data/2.5/weather?";
 const API_KEY = "ac5815b64e47eca93a9671631b3f0150";
 let btn = document.getElementById('generate');
+let userFeeling = document.getElementById('feelings');
+let zipCode = document.getElementById('zip');
 // zipCode = 94040; //only becouse there is no event listener yet
 
 // Event listener to add function to existing HTML DOM element
@@ -10,10 +12,9 @@ btn.addEventListener('click', requestData);
 
 /* Function called by event listener */
 function requestData(){
-    let zipCode = document.getElementById('zip').value;
 
-    if(zipCode!== ''){
-        getWeatherData(API_URL,zipCode,API_KEY);
+    if(zipCode.value!== ''){
+        getWeatherData(API_URL,zipCode.value,API_KEY);
     }else{
         alert('insert a valid zip code.')
     }
@@ -25,10 +26,38 @@ async function getWeatherData(baseUrl='',userZipCode='',appid=''){
     try{
         let data = await response.json();
         console.log(data);
+        storeWeatherData('http://127.0.0.1:3000/data',{temp: data.main.temp, date: data.dt, resp: userFeeling.value });
     }catch(error){
         console.log(error);
     }
 }
+
+/* Function to POST data */
+async function storeWeatherData(url = '',data ={}){
+
+    let response = await fetch(url,{
+        method:'POST',
+        credentials: 'same-origin',
+        headers:{
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            temp: data.temp,
+            date: data.date,
+            resp: data.resp,
+        })
+    });
+
+    try{
+        let data = await response.json();
+        console.log('finished post request');
+    }catch(error){
+        console.log(error);
+    }
+}
+
+
+// storeWeatherData('http://127.0.0.1:3000/data',{temp: 10, date: new Date(), resp: "nothing" });
 
 
 // Create a new date instance dynamically with JS

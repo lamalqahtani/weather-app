@@ -36,6 +36,7 @@ app.post('/data',(req,res)=>{
     projectData["response"] = req.body.resp;
     console.log(`new project data: `);
     console.log(projectData);
+    res.end();
 });
 
 // Setup Server
