@@ -86,9 +86,9 @@ async function getFromServerAndUpdateUI(url = ''){
     try{
         let data = await response.json();
         console.log(data);
-        tempDiv.textContent = data.temp;
-        dateDiv.textContent = data.date;
-        contentDiv.textContent = data.response;
+        tempDiv.textContent = 'temp: '+data.temp;
+        dateDiv.textContent = 'date: '+data.date;
+        contentDiv.textContent = 'content: '+data.response;
     }catch(error){
         console.log(error);
     }
